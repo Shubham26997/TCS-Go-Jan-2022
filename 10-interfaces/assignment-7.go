@@ -10,16 +10,18 @@ type Product struct {
 	Category string
 }
 
-func (p Product) ToString() string {
+/* Stringer interface */
+func (p Product) String() string {
 	return fmt.Sprintf("Id = %d, Name = %s, Cost = %f, Units = %d, Category = %s", p.Id, p.Name, p.Cost, p.Units, p.Category)
 }
 
 type Products []Product
 
-func (products Products) ToString() string {
+/* Stringer interface */
+func (products Products) String() string {
 	result := ""
 	for _, p := range products {
-		result += fmt.Sprintf("%s\n", p.ToString())
+		result += fmt.Sprintf("%v\n", p)
 	}
 	return result
 }
@@ -129,7 +131,7 @@ func main() {
 	}
 	costlyProducts := products.Filter(costlyProductCriteria)
 	fmt.Println("Costly Products")
-	fmt.Println(costlyProducts.ToString())
+	fmt.Println(costlyProducts)
 
 	//Filter Stationary Products
 	fmt.Println("Filter")
@@ -139,7 +141,7 @@ func main() {
 	}
 	stationaryProducts := products.Filter(stationaryProductCriteria)
 	fmt.Println("Stationary Products")
-	fmt.Println(stationaryProducts.ToString())
+	fmt.Println(stationaryProducts)
 
 	fmt.Println("Any")
 	fmt.Println("Are there any costly products ? : ", products.Any(costlyProductCriteria))
